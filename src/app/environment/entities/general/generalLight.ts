@@ -3,7 +3,7 @@ import * as GC from "../../../global/globalConstatnts";
 
 class GeneralLight {
     constructor(scene: Scene) {
-        this._lightObject = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
+        this._lightObject = new HemisphericLight("light", new Vector3(1, 1, -10), scene);
     }
 
     private _lightObject: HemisphericLight;

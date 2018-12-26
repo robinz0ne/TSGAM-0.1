@@ -2,6 +2,7 @@ import { Engine, Scene, ArcRotateCamera, UniversalCamera, FreeCamera, Hemispheri
 import { CenterAncor } from "./centerAncor";
 import * as GC from "../../../global/globalConstatnts";
 import { Environment } from "../../environment";
+import {Display} from "./display"
 
 class GeneralCamera {
     constructor(scene: Scene, centerAncor: Mesh, canvas: any) {
@@ -26,7 +27,6 @@ class GeneralCamera {
    public onMoved(){
         this.cameraObject.position.x = Environment.centerAncor.objectAnchor.position.x;
         this.cameraObject.position.y = Environment.centerAncor.objectAnchor.position.y;
-       // this.cameraObject.position.z = Environment.centerAncor.objectAnchor.position.z;
     }
 }
 
