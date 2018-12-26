@@ -19,16 +19,29 @@ class WorldScene {
         this._sceneObject.actionManager.registerAction(ActionsKeyboard.buttonRightOnUp);
 
         //костыль, для глобальной обработки нажатия клавиш, потому что через ActionManager работает плохо
-        this._sceneObject.registerBeforeRender(function() {
-            if (KeyBoardStates.isMovedButtonsPressed){
-                //Если нажата хотя бы одна клавиша отвечающая за управление - запускаем событие движения центр-якоря
-                Environment.centerAncor.onMoved();
+        this._sceneObject.registerBeforeRender(function () {
+            if (KeyBoardStates.isMovedButtonsPressed) {
+                //Если нажата хотя бы одна клавиша отвечающая за управление и сцена не заблокирована - запускаем событие движения центр-якоря
+                if (!Environment.scene.isLocked) {
+                    Environment.centerAncor.onMoved();
+                }
             }
         });
+
+        this._sceneObject.onPointerDown = function (evt) {
+            if (!this.isLocked) {
+                Environment.display.canvas.requestPointerLock = Environment.display.canvas.requestPointerLock || Environment.display.canvas.msRequestPointerLock || Environment.display.canvas.mozRequestPointerLock || Environment.display.canvas.webkitRequestPointerLock;
+                if (Environment.display.canvas.requestPointerLock) {
+                    Environment.display.canvas.requestPointerLock();
+                }
+            }
+        };
 
     }
 
     private _sceneObject: Scene;
+
+    isLocked: Boolean = true;
 
     get sceneObject(): Scene {
         return this._sceneObject;

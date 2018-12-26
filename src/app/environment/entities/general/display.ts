@@ -14,8 +14,6 @@ class Display {
     }
 
     initEvents() {
-   // this._canvas.addEventListener("pointerdown", this.onPointerDown, false);
-   // this._canvas.addEventListener("pointerup", this.onPointerUp, false);
         this._canvas.addEventListener("pointermove", this.onPointerMove, false);
     }
 

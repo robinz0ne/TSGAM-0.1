@@ -1,10 +1,15 @@
 import { Engine, Scene, ArcRotateCamera, UniversalCamera, FreeCamera, HemisphericLight, Vector3, MeshBuilder, Mesh } from "babylonjs";
 import * as GC from "../../../global/globalConstatnts";
 import { Environment } from "../../environment";
+import { CenterAncor } from "./centerAncor";
+import { WorldScene } from "./worldScene";
 
 class Cursor {
     constructor(scene: Scene) {
-        this._cursorObject = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
+        this._cursorObject = BABYLON.MeshBuilder.CreateSphere("cursor", {}, scene);
+        this._cursorObject.scaling.x = 0.2;
+        this._cursorObject.scaling.y = 0.2;
+        this._cursorObject.scaling.z = 0.2;        
         this._cursorObject.position.x = Environment.centerAncor.objectAnchor.position.x;
         this._cursorObject.position.y = Environment.centerAncor.objectAnchor.position.y;
     }
@@ -16,31 +21,28 @@ class Cursor {
     }
 
 
-    public onMove(e: any){
+    public onMove(e: any) {
 
-        // var pickinfo = Environment.scene.pick(Environment.scene.pointerX, Environment.scene.pointerY);
-        // console.log(Environment.cursor.cursorObject.position);
-        // console.log(pickinfo.ray.direction);
-        // console.log( Environment.scene.onPointerMove);
+        if (!Environment.scene.isLocked) {
 
-        //   var worldMatrix =  Environment.cursor.cursorObject.getWorldMatrix();
-        //   var transformMatrix = Environment.scene.getTransformMatrix();
-        //   var position = Environment.cursor.cursorObject.position;
-        //   var viewport = Environment.scene.activeCamera.viewport;
-        //   var coordinates = BABYLON.Vector3.Project(position, worldMatrix, transformMatrix, viewport);
+            var p = BABYLON.Vector3.Project(this.cursorObject.position,
+                BABYLON.Matrix.Identity(),
+                Environment.scene.sceneObject.getTransformMatrix(),
+                Environment.scene.sceneObject.activeCamera.viewport.toGlobal(Environment.engine.getRenderWidth(), Environment.engine.getRenderHeight()));
 
-        //  console.log(worldMatrix);
-        //  console.log(transformMatrix);
-        //   console.log(position);
-        //  console.log(viewport);
-        //  console.log(Environment.scen);
-
-       // if (e.movementX != 0) {
-            this._cursorObject.position.x += e.movementX / 50;
-     //   }
-     //   if (e.movementY != 0) {
-            this._cursorObject.position.y -= e.movementY / 50;
-      //  }
+            if (e.movementX > 0 && p.x < Environment.display.canvas.width) {
+                this._cursorObject.position.x += e.movementX / 50;
+            }
+            if (e.movementX < 0 && p.x > 0) {
+                this._cursorObject.position.x += e.movementX / 50;
+            }
+            if (e.movementY > 0 && p.y < Environment.display.canvas.width) {
+                this._cursorObject.position.y -= e.movementY / 50;
+            }
+            if (e.movementY < 0 && p.y > 0) {
+                this._cursorObject.position.y -= e.movementY / 50;
+            }
+        }
     }
 }
 

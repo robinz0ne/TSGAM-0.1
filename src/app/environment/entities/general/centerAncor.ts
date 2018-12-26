@@ -23,15 +23,19 @@ class CenterAncor {
 
         if (KeyBoardStates.isButtonUpPressed) {
             this.objectAnchor.position.y += 0.2;
+            Environment.cursor.cursorObject.position.y +=0.2;
         }
         if (KeyBoardStates.isButtonDownPressed) {
             this.objectAnchor.position.y -= 0.2;
+            Environment.cursor.cursorObject.position.y -=0.2;
         }
         if (KeyBoardStates.isButtonLeftPressed) {
             this.objectAnchor.position.x -= 0.2;
+            Environment.cursor.cursorObject.position.x -= 0.2;
         }
         if (KeyBoardStates.isButtonRightPressed) {
             this.objectAnchor.position.x += 0.2;
+            Environment.cursor.cursorObject.position.x += 0.2;
         }
         
         Environment.camera.onMoved();
