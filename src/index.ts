@@ -1,27 +1,52 @@
- import { Engine, Scene, ArcRotateCamera, HemisphericLight, Vector3, MeshBuilder, Mesh } from "babylonjs";
+import { Engine, Scene, ArcRotateCamera, UniversalCamera, HemisphericLight, FreeCamera, Vector3, MeshBuilder, Mesh, Space } from "babylonjs";
+import { Initializer } from "./app/initializer";
+import { Environment } from "./app/environment/environment";
 
- var canvas: any = document.getElementById("renderCanvas");
- var engine: Engine = new Engine(canvas, true);
+import { CenterAncor } from "./app/environment/entities/general/centerAncor";
 
-function createScene(): Scene {
-    var scene: Scene = new Scene(engine);
+Initializer.init(document.getElementById("renderCanvas"));
 
-    var camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
-    camera.attachControl(canvas, false);
+// document.onmousemove = function (event) {
+//     var xp = event.clientX;     // Get the horizontal coordinate
+//     var yp = event.clientY;     // Get the vertical coordinate
+//     var coor = "X coords: " + xp + ", Y coords: " + yp;
+//     var HexXSpacing = 3;
+//     var HexYSpacing = 3;
 
-    var light1: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
 
-  //  var sphere: Mesh = MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
+//     var x = 1.0 * (xp - Map.HexCoords["0,0"].x) / HexXSpacing;
+//     var y = 1.0 * (xp - Map.HexCoords["0,0"].y) / HexYSpacing;
+//     var z = -0.5 * x - y;
+//     y = -0.5 * x + y;
+//     var ix = Math.floor(x + 0.5);
+//     var iy = Math.floor(y + 0.5);
+//     var iz = Math.floor(z + 0.5);
+//     var s = ix + iy + iz;
 
-   // var myBox = BABYLON.MeshBuilder.CreateBox("myBox", {height: 1, width: 1 , depth: 1}, scene);
-  
-   var myGround = BABYLON.MeshBuilder.CreateGround("myGround", {width: 6, height: 4, subdivisions: 4}, scene);
-  
-   return scene;
-}
+//     debugger;
 
-var scene: Scene = createScene();
+//     if( s ){
+//         var abs_dx = Math.abs(ix-x);
+//         var abs_dy = Math.abs(iy-y);
+//         var abs_dz = Math.abs(iz-z);
 
-engine.runRenderLoop(() => {
-    scene.render();
+//         if( abs_dx >= abs_dy && abs_dx >= abs_dz )
+//             ix -= s;
+//         else if( abs_dy >= abs_dx && abs_dy >= abs_dz )
+//             iy -= s;
+//         else
+//             iz -= s;
+//     }
+
+//     var foo = Map.HexCoords["0,0"];//Map.HexCoords[ix.toString()+ "," + (( iy - iz + (1-ix%2) ) / 2).toString()];
+//      console.clear();
+//      console.log(foo);
+//      console.log(ix.toString()+ "," + (( iy - iz + (1-ix%2) ) / 2).toString());
+     
+// }
+
+
+
+Environment.engine.runRenderLoop(() => {
+    Environment.scene.onRender();
 });
