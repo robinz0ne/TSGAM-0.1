@@ -1,8 +1,8 @@
 import { Engine, Scene, ArcRotateCamera, UniversalCamera, HemisphericLight, FreeCamera, Vector3, MeshBuilder, Mesh, Space } from "babylonjs";
 import { Initializer } from "./app/initializer";
-import { Environment } from "./environment/environment";
+import { Environment } from "./app/environment/environment";
 
-import { Map } from "./Map/map";
+import { CenterAncor } from "./app/environment/entities/general/centerAncor";
 
 Initializer.init(document.getElementById("renderCanvas"));
 
@@ -45,7 +45,8 @@ Initializer.init(document.getElementById("renderCanvas"));
      
 // }
 
-Environment.engine.runRenderLoop(() => {
-    Environment.scene.render();
 
+
+Environment.engine.runRenderLoop(() => {
+    Environment.scene.onRender();
 });

@@ -27,7 +27,7 @@ class Hex {
     }
 
     //Отрисовка точек многоугольника
-    private hexCorner(center, size, i): Vector3 {
+    private hexCorner(center: Center, size: number, i: number): Vector3 {
         var angle_deg = 60 * i + 30;
         var angle_rad = Math.PI / 180 * angle_deg;
         return new BABYLON.Vector3(center.x + size * Math.cos(angle_rad), center.y + size * Math.sin(angle_rad));
@@ -40,9 +40,7 @@ class Hex {
             this.points.push(itemPoint);
         }
 
-        this.lines = BABYLON.MeshBuilder.CreateLines("lines", { points: this.points }, Environment.scene);
-
-
+        this.lines = BABYLON.MeshBuilder.CreateLines("lines", { points: this.points }, Environment.scene.sceneObject);
     }
 
 }

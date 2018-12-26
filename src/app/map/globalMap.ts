@@ -2,7 +2,7 @@ import { Engine, Scene, ArcRotateCamera, UniversalCamera, FreeCamera, Hemispheri
 import { Hex } from "./hex";
 import * as GC from "../global/globalConstatnts";
 
-class Map {
+class GlobalMap {
 
     static HexCollection: Hex[] = [];
     static HexCoords: { [id: string]: IHexCoords; } = {};
@@ -32,7 +32,6 @@ class Map {
                 width = Math.sqrt(3) / 2 * height;
 
                 horiz += width;
-
             }
 
             if (iy % 2 == 0) {
@@ -50,4 +49,4 @@ interface IHexCoords {
     y: number;
 
 }
-export { Map };
+export { GlobalMap };

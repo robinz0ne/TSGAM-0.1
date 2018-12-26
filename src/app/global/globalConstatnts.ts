@@ -3,12 +3,12 @@ export namespace GlobalConstatnts {
 
         //Количество многоугольников по горизонтали
         public static get HexCountHorizontal(): number {
-            return 100;
+            return 30;
         }
 
         //Количество многоугольников по вертикали
         public static get HexCountVertical(): number {
-            return 100;
+            return 30;
         }
 
     }
@@ -41,7 +41,7 @@ export namespace GlobalConstatnts {
 
         //Стартовая позиция камеры по Z
         public static get InitZ(): number {
-            return -10;
+            return -20;
         }
 
     }
